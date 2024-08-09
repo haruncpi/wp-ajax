@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "FiraCode";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/FiraCode-Regular.ttf") format("truetype");
+}
+.ajax-inspector {
+  padding-left: 5px;
+  padding-top: 10px;
+}
+.ajax-inspector .wp-filter {
+  display: flex;
+  justify-content: space-between;
+}
+.ajax-inspector textarea {
+  font-family: "FiraCode" !important;
+  border-color: #ddd;
+  padding: 10px;
+  background: #f9f9f9;
+}
+.ajax-inspector .left-right-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.ajax-inspector .header {
+  margin-bottom: 25px;
+  margin-right: 20px;
+}
+.ajax-inspector .ajax-list-action {
+  display: none;
+  text-align: right;
+}
+.ajax-inspector .ajax-list-action .row-delete {
+  color: red;
+}
+.ajax-inspector .wp-filter {
+  margin-bottom: 10px;
+  margin-top: 25px;
+}
+.ajax-inspector .row-selected {
+  background: antiquewhite;
+}
+.ajax-inspector .title-column {
+  cursor: pointer;
+}
+.ajax-inspector button:active,
+.ajax-inspector button:focus,
+.ajax-inspector a:active,
+.ajax-inspector a:focus {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}
+.ajax-inspector .body-wrapper {
+  display: flex;
+  flex-grow: 1;
+}
+.ajax-inspector .input-wrapper {
+  width: 50%;
+  min-width: 50%;
+  margin-right: 25px;
+}
+.ajax-inspector .response-wrapper {
+  max-width: 50%;
+  flex-grow: 1;
+  overflow-x: auto;
+}
+.ajax-inspector .response-wrapper p:nth-child(1) {
+  margin-top: 35px;
+}
+.ajax-inspector .saved-request-list-wrapper table tr:hover {
+  background-color: #f4f4f4;
+}
+.ajax-inspector .saved-request-list-wrapper table tr:hover > .ajax-list-action {
+  display: block;
+}
+.ajax-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.ajax-actions .selected-title {
+  margin-top: 5px;
+  display: inline-block;
+  margin-right: 10px;
+}
+#status-code {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+  padding: 2px 8px;
+  display: none;
+  margin-left: 15px;
+}
+button:active,
+button:visited {
+  box-shadow: none;
+  outline: none;
+}
+#ajax {
+  background: #3858e9;
+}
+#output {
+  padding-top: 0;
+  padding-left: 0;
+  height: calc(100vh - 200px);
+}
+#input {
+  width: 100%;
+}
+#input:focus {
+  box-shadow: none;
+}

@@ -1,0 +1,141 @@
+@font-face {
+  font-family: "FiraCode";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/FiraCode-Regular.ttf") format("truetype");
+}
+
+@editor_height: calc(100vh - 200px);
+
+.ajax-inspector {
+  padding-left: 5px;
+  padding-top: 10px;
+
+  .wp-filter {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  textarea {
+    font-family: "FiraCode" !important;
+    border-color: #ddd;
+    padding: 10px;
+    background: #f9f9f9;
+  }
+
+  .left-right-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .header {
+    margin-bottom: 25px;
+    margin-right: 20px;
+  }
+
+  .ajax-list-action {
+    display: none;
+    text-align: right;
+    .row-delete {
+      color: red;
+    }
+  }
+
+  .wp-filter {
+    margin-bottom: 10px;
+    margin-top: 25px;
+  }
+
+  .row-selected {
+    background: antiquewhite;
+  }
+
+  .title-column {
+    cursor: pointer;
+  }
+
+  button:active,
+  button:focus,
+  a:active,
+  a:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none;
+  }
+
+  .body-wrapper {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .input-wrapper {
+    width: 50%;
+    min-width: 50%;
+    margin-right: 25px;
+  }
+  .response-wrapper {
+    max-width: 50%;
+    flex-grow: 1;
+    overflow-x: auto;
+    p:nth-child(1) {
+      margin-top: 35px;
+    }
+  }
+
+  .saved-request-list-wrapper {
+    table tr:hover {
+      background-color: #f4f4f4;
+    }
+    table tr:hover > .ajax-list-action {
+      display: block;
+    }
+  }
+}
+
+.ajax-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+  .selected-title {
+    margin-top: 5px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+#status-code {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+  padding: 2px 8px;
+  display: none;
+  margin-left: 15px;
+}
+
+button {
+  &:active,
+  &:visited {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+#ajax {
+  background: #3858e9;
+}
+
+#output {
+  padding-top: 0;
+  padding-left: 0;
+  height: @editor_height;
+}
+
+#input {
+  width: 100%;
+  &:focus {
+    box-shadow: none;
+  }
+}
