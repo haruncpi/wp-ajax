@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
 assets/admin/js
+build
+*.zip
+assets/languages

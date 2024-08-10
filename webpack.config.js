@@ -3,7 +3,7 @@ const FilterEntryOutputPlugin = require('filter-entry-output-plugin')
 
 let entry = {
     'angular-app': './assets/admin/src/angular-app/app.js',
-    'react-app': './assets/admin/src/react-app/index.js',
+    //'react-app': './assets/admin/src/react-app/index.js',
 };
 
 let output = {

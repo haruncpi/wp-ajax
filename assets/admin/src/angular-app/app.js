@@ -24,6 +24,8 @@ myApp.controller('AppCtrl', function ($scope, $http) {
 
     if (savedData) {
         $scope.model.payload = savedData
+    } else {
+        $scope.model.payload = 'action:generate-password'
     }
 
     $('#input').keydown(function (e) {
@@ -48,8 +50,8 @@ myApp.controller('AppCtrl', function ($scope, $http) {
 
     let jsonViewerConfig = {
         collapsed: false,
-        rootCollapsable:false,
-        bigNumbers:false
+        rootCollapsable: false,
+        bigNumbers: false
     }
 
     $('#ajax').click(function () {
@@ -76,7 +78,7 @@ myApp.controller('AppCtrl', function ($scope, $http) {
                     },
                     success: function (res, textStatus, xhr) {
                         $('#status-code').html(xhr.status).removeAttr('style')
-                        output.jsonViewer(res,jsonViewerConfig);
+                        output.jsonViewer(res, jsonViewerConfig);
                     },
                     error: function (err) {
                         $('#status-code').html(err.status).css('background-color', 'red')
@@ -92,7 +94,7 @@ myApp.controller('AppCtrl', function ($scope, $http) {
 
                         }
 
-                        output.jsonViewer(errorText,jsonViewerConfig);
+                        output.jsonViewer(errorText, jsonViewerConfig);
                     },
                     complete: function () {
                         $scope.sending = false
