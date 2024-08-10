@@ -4,7 +4,7 @@
 	"version" : "1.0.0",
 	"author" : "<a href='https://github.com/haruncpi'>Harun</a>",
 	"author_profile" : "https://github.com/haruncpi",
-	"download_url" : "https://github.com/haruncpi/wp-ajax/releases/download/v1.0.0/ajax-1.0.0.zip",
+	"download_url" : "https://github.com/haruncpi/wp-ajax/releases/download/v1.0.1/ajax-1.0.1.zip",
 	"requires" : "3.0",
 	"tested" : "6.6",
 	"requires_php" : "7.4",

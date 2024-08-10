@@ -20,9 +20,11 @@
 }
 .ajax-inspector .left-right-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+.ajax-inspector .left-right-content h1 {
+  margin-right: 10px;
 }
 .ajax-inspector .header {
   margin-bottom: 25px;
