@@ -10,6 +10,7 @@
 <div class="ajax-inspector" ng-app="ajaxApp" ng-controller="AppCtrl" ng-cloak>
 	<div class="left-right-content header">
 		<h1>Ajax Inspector</h1>
+		<p>v<?php echo esc_html( AJAX_VERSION ); ?></p>
 	</div>
 
 	<div class="body-wrapper">
