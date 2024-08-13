@@ -1,14 +1,14 @@
 {
 	"name" : "Ajax",
 	"slug" : "ajax",
-	"version" : "1.0.2",
-	"download_url" : "https://github.com/haruncpi/wp-ajax/releases/download/v1.0.2/ajax-1.0.2.zip",
+	"version" : "1.0.3",
+	"download_url" : "https://github.com/haruncpi/wp-ajax/releases/download/v1.0.3/ajax-1.0.3.zip",
 	"author" : "<a href='https://github.com/haruncpi'>Harun</a>",
 	"author_profile" : "https://github.com/haruncpi",
-	"requires" : "3.0",
+	"requires" : "5.0",
 	"tested" : "6.6",
 	"requires_php" : "7.4",
-	"last_updated" : "2024-08-14 12:00:00",
+	"last_updated" : "2024-08-14 00:00:00",
 	"sections" : {
 		"description" : "This simple plugin does nothing, only gets updates from a custom server",
 		"installation" : "Click the activate button and that's it.",

@@ -3,7 +3,7 @@
  * Plugin Name: Ajax
  * Description: Ajax request testing
  * Author: haruncpi
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author URI: https://github.com/haruncpi
  * Requires PHP: 7.4
  * Requires at least: 5.3
