@@ -1,6 +1,8 @@
 <?php
 /**
  * Manage Plugin Update
+ * Plugin update transient: _site_transient_update_plugins
+ * Theme update transient: _site_transient_update_themes
  *
  * @package Ajax
  * @author Harun <harun.cox@gmail.com>
@@ -63,9 +65,8 @@ class Updater {
 	 */
 	private function __construct( $config ) {
 		$required_keys = array(
-			'update_url',
 			'plugin_file',
-			'current_version',
+			'update_url',
 		);
 
 		foreach ( $required_keys as $key ) {
@@ -74,9 +75,21 @@ class Updater {
 			}
 		}
 
+		$plugin_file = $config['plugin_file'];
+
+		if ( ! is_file( $plugin_file ) ) {
+			wp_die( esc_html( "Plugin file not found: $plugin_file" ) );
+		}
+
+		if ( ! function_exists( 'get_plugin_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$plugin_data = get_plugin_data( $plugin_file );
+
 		$this->update_url    = $config['update_url'];
 		$this->plugin_slug   = plugin_basename( $config['plugin_file'] );
-		$this->version       = $config['current_version'];
+		$this->version       = $plugin_data['Version'];
 		$this->cache_key     = "{$this->plugin_slug}_update";
 		$this->cache_allowed = true;
 
@@ -91,7 +104,7 @@ class Updater {
 	 *
 	 * @return self
 	 */
-	public static function setup( $config ) {
+	public static function configure( $config ) {
 		if ( isset( self::$instance ) ) {
 			return self::$instance;
 		}
@@ -136,6 +149,15 @@ class Updater {
 
 		return $remote;
 
+	}
+
+	/**
+	 * Clear request cache.
+	 *
+	 * @return void
+	 */
+	public function clear_request_cache() {
+		delete_transient( $this->cache_key );
 	}
 
 	/**

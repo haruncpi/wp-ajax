@@ -55,11 +55,10 @@ class Plugin {
 		new Ajax();
 
 		$config = array(
-			'update_url'      => 'https://raw.githubusercontent.com/haruncpi/wp-ajax/master/src/Updater/plugin.json',
-			'plugin_file'     => AJAX_FILE,
-			'current_version' => AJAX_VERSION,
+			'plugin_file' => AJAX_FILE,
+			'update_url'  => 'https://raw.githubusercontent.com/haruncpi/wp-ajax/master/src/Updater/plugin.json',
 		);
 
-		Updater::setup( $config );
+		Updater::configure( $config );
 	}
 }

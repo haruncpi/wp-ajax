@@ -3,7 +3,7 @@
  * Plugin Name: Ajax
  * Description: Ajax request testing
  * Author: haruncpi
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author URI: https://github.com/haruncpi
  * Requires PHP: 7.4
  * Requires at least: 5.3
@@ -13,13 +13,10 @@
  * @package Ajax
  */
 
-use Ajax\Plugin;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
-define( 'AJAX_VERSION', '1.0.1' );
-define( 'AJAX_FILE', __DIR__ );
-define( 'AJAX_DIR', plugin_dir_path( __FILE__ ) );
-define( 'AJAX_URL', plugin_dir_url( __FILE__ ) );
-
-Plugin::get_instance();
+Ajax\Plugin::get_instance();
