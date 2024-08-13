@@ -17,6 +17,7 @@ try {
 
 const zipName = `${pluginName}-${versionNumber}.zip`;
 const buildDest = './build';
+
 const buildFiles = [
     './**/*',
     '!./build/**',
@@ -71,7 +72,7 @@ const makePod = (cb) => {
     }
 }
 
-const build = cb => src(buildFiles).pipe(dest(buildDest))
+const build = cb => src(buildFiles).pipe(dest(`${buildDest}/${pluginName}`))
 const buildZip = cb => src(`${buildDest}/**/*`).pipe(zip(zipName)).pipe(dest('./'))
 
 
