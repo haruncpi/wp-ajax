@@ -177,4 +177,69 @@ myApp.controller('AppCtrl', function ($scope, $http) {
                 }
             })
     }
+
+    /**
+     * Update plugin
+     */
+    function compareVersion(v1, comparator, v2) {
+        "use strict";
+        var comparator = comparator == '=' ? '==' : comparator;
+        if (['==', '===', '<', '<=', '>', '>=', '!=', '!=='].indexOf(comparator) == -1) {
+            throw new Error('Invalid comparator. ' + comparator);
+        }
+        var v1parts = v1.split('.'), v2parts = v2.split('.');
+        var maxLen = Math.max(v1parts.length, v2parts.length);
+        var part1, part2;
+        var cmp = 0;
+        for (var i = 0; i < maxLen && !cmp; i++) {
+            part1 = parseInt(v1parts[i], 10) || 0;
+            part2 = parseInt(v2parts[i], 10) || 0;
+            if (part1 < part2)
+                cmp = 1;
+            if (part1 > part2)
+                cmp = -1;
+        }
+        return eval('0' + comparator + cmp);
+    }
+
+    $scope.pluginInfo = {
+        currentVersion: _ajax.version,
+        newVersion: null,
+        updateAvailable: false,
+        updateUrl: _ajax.updateUrl
+    }
+
+    $scope.checkUpdate = function () {
+        $http.get($scope.pluginInfo.updateUrl)
+            .success(function (res) {
+                let newVersion = res.version
+
+                $scope.pluginInfo.newVersion = newVersion
+                $scope.pluginInfo.updateAvailable = compareVersion($scope.pluginInfo.currentVersion, '<', newVersion)
+            })
+    }
+
+    $scope.checkUpdate()
+
+    $scope.updating = false;
+    $scope.updatePlugin = function () {
+        let data = {
+            plugin: 'ajax/ajax.php',
+            slug: 'ajax',
+            action: 'update-plugin',
+            _ajax_nonce: _ajax.pluginUpdateNonce
+        }
+
+        $scope.updating = true
+        $http.post(ajaxUrl, toFormData(data), config)
+            .success(function (res) {
+                $scope.updating = false
+                if (res.success) {
+                    window.location.reload()
+                } else {
+                    alert(res.data.errorMessage)
+                }
+            })
+    }
+    // End plugin update.
 })

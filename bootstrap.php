@@ -19,3 +19,4 @@ define( 'AJAX_FILE', __DIR__ . '/ajax.php' );
 define( 'AJAX_VERSION', get_plugin_data( AJAX_FILE )['Version'] );
 define( 'AJAX_DIR', plugin_dir_path( AJAX_FILE ) );
 define( 'AJAX_URL', plugin_dir_url( AJAX_FILE ) );
+define( 'AJAX_UPDATE_URL', 'https://raw.githubusercontent.com/haruncpi/wp-ajax/master/src/Updater/plugin.json' );

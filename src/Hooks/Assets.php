@@ -48,8 +48,11 @@ class Assets extends BasePlugin {
 			'ajax-react-app',
 			'_ajax',
 			array(
-				'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
-				'pluginUrl' => plugin_dir_url( AJAX_FILE ),
+				'version'           => AJAX_VERSION,
+				'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
+				'updateUrl'         => AJAX_UPDATE_URL,
+				'pluginUrl'         => plugin_dir_url( AJAX_FILE ),
+				'pluginUpdateNonce' => wp_create_nonce( 'updates' ),
 			)
 		);
 	}

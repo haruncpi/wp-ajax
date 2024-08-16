@@ -17,6 +17,7 @@
   "devDependencies": {
     "@wordpress/scripts": "^27.8.0",
     "add": "^2.0.6",
+    "babel-plugin-angularjs-annotate": "^0.10.0",
     "filter-entry-output-plugin": "^1.0.0",
     "fs": "0.0.1-security",
     "gulp": "^4.0.2",

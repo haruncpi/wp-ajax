@@ -9,8 +9,21 @@
 
 <div class="ajax-inspector" ng-app="ajaxApp" ng-controller="AppCtrl" ng-cloak>
 	<div class="left-right-content header">
-		<h1>Ajax Inspector</h1>
-		<p>v<?php echo esc_html( AJAX_VERSION ); ?></p>
+		<div class="display-flex align-items-center">
+			<h1>Ajax Inspector</h1>
+			<p>v<?php echo esc_html( AJAX_VERSION ); ?></p>
+		</div>
+
+		<div class="display-flex align-items-center gap-10" ng-show="pluginInfo.updateAvailable">
+			<span style="color: red;" ng-hide="updating">New version available - <strong>v{{pluginInfo.newVersion}}</strong></span>
+
+			<button type="button" ng-hide="updating" class="button button-default" ng-click="updatePlugin()">{{updating? 'Updating':'Update Now'}}</button>
+
+			<span class="updating-info" ng-show="updating">
+				<span class="dashicons dashicons-update"></span>	
+				Updating version from <strong>{{pluginInfo.currentVersion}}</strong> to <strong>{{pluginInfo.newVersion}}</strong>
+			</span>
+		</div>
 	</div>
 
 	<div class="body-wrapper">
@@ -18,11 +31,14 @@
 		<div class="input-wrapper">
 
 			<div class="ajax-actions">
+				<div class="display-flex align-items-center gap-10">
+					<strong>Params</strong>
+				</div>
 				<div>
 					<span class="selected-title" ng-show="model.id"><strong>Selected</strong>: {{model.title}}</span>
 					<button ng-disabled="saving || !model.payload.length" ng-click="save(model)" class="button button-default">{{saving?'Saving': model.id ? 'Update':'Save'}}</button>
+					<button ng-disabled="sending || !model.payload.length" class="button button-primary" id="ajax">{{sending?'Sending':'Send'}}</button>
 				</div>
-				<button ng-disabled="sending || !model.payload.length" class="button button-primary" id="ajax">{{sending?'Sending':'Send'}}</button>
 			</div>
 
 			<div>

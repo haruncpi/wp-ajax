@@ -11,6 +11,24 @@
   padding-left: 5px;
   padding-top: 10px;
 
+  .display-flex{
+    display: flex;
+  }
+
+  .align-items-center{
+    align-items: center;
+  }
+
+  .gap-5{
+    gap: 5px;
+  }
+  .gap-10{
+    gap: 10px;
+  }
+  .gap-15{
+    gap: 15px;
+  }
+
   .wp-filter {
     display: flex;
     justify-content: space-between;
@@ -27,6 +45,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    justify-content: space-between;
     h1{
       margin-right: 10px;
     }
@@ -98,7 +117,7 @@
 
 .ajax-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   margin-bottom: 10px;
   .selected-title {
@@ -139,5 +158,13 @@ button {
   width: 100%;
   &:focus {
     box-shadow: none;
+  }
+}
+
+
+.updating-info{
+  color: green;
+  .dashicons-update{
+    animation: rotation 2s infinite linear;
   }
 }

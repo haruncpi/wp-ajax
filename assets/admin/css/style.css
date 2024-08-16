@@ -8,6 +8,21 @@
   padding-left: 5px;
   padding-top: 10px;
 }
+.ajax-inspector .display-flex {
+  display: flex;
+}
+.ajax-inspector .align-items-center {
+  align-items: center;
+}
+.ajax-inspector .gap-5 {
+  gap: 5px;
+}
+.ajax-inspector .gap-10 {
+  gap: 10px;
+}
+.ajax-inspector .gap-15 {
+  gap: 15px;
+}
 .ajax-inspector .wp-filter {
   display: flex;
   justify-content: space-between;
@@ -22,6 +37,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  justify-content: space-between;
 }
 .ajax-inspector .left-right-content h1 {
   margin-right: 10px;
@@ -80,7 +96,7 @@
 }
 .ajax-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   margin-bottom: 10px;
 }
@@ -115,4 +131,10 @@ button:visited {
 }
 #input:focus {
   box-shadow: none;
+}
+.updating-info {
+  color: green;
+}
+.updating-info .dashicons-update {
+  animation: rotation 2s infinite linear;
 }
