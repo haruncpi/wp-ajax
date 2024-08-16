@@ -56,7 +56,7 @@ class Plugin {
 
 		$config = array(
 			'plugin_file' => AJAX_FILE,
-			'update_url'  => 'https://raw.githubusercontent.com/haruncpi/wp-ajax/master/src/Updater/plugin.json',
+			'update_url'  => AJAX_UPDATE_URL,
 		);
 
 		Updater::configure( $config );
