@@ -44,6 +44,9 @@ class Assets extends BasePlugin {
 			true
 		);
 
+		wp_enqueue_script( 'thickbox' );
+		wp_enqueue_style( 'thickbox' );
+
 		wp_localize_script(
 			'ajax-react-app',
 			'_ajax',

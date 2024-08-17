@@ -26,13 +26,34 @@
 		</div>
 	</div>
 
+	<?php add_thickbox(); ?>
+	<div id="param-info-thickbox" style="display:none;">
+		<p style="margin-bottom: 0;">Key value pair with (:) separated.
+		<br>
+		<br>
+		<strong>Example</strong>
+		<br>
+<pre style="margin-top: 0;">
+name:jhon
+nage:25
+city:dhaka
+email:jhon@example.com
+hobbies[]:drawing
+hobbies[]:swimming
+hobbies[]:cricket
+</pre>
+		</p>
+	</div>
+
 	<div class="body-wrapper">
 		<input type="hidden" class="ajax_url" value="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
 		<div class="input-wrapper">
 
 			<div class="ajax-actions">
 				<div class="display-flex align-items-center gap-10">
-					<strong>Params</strong>
+					<strong>
+						<a style="color: #777;" href="#TB_inline?width=300&height=220&inlineId=param-info-thickbox" title="Params" class="dashicons dashicons-info-outline thickbox"></a> 
+						Params</strong>
 				</div>
 				<div>
 					<span class="selected-title" ng-show="model.id"><strong>Selected</strong>: {{model.title}}</span>

@@ -75,5 +75,5 @@ const makePod = (cb) => {
 const build = cb => src(buildFiles).pipe(dest(`${buildDest}/${pluginName}`))
 const buildZip = cb => src(`${buildDest}/**/*`).pipe(zip(zipName)).pipe(dest('./'))
 
-
+exports.clear = series(cleanZip, cleanBuild)
 exports.build = series(cleanZip, cleanBuild, makePod, build, buildZip)
