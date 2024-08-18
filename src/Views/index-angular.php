@@ -14,15 +14,29 @@
 			<p>v<?php echo esc_html( AJAX_VERSION ); ?></p>
 		</div>
 
-		<div class="display-flex align-items-center gap-10" ng-show="pluginInfo.updateAvailable">
-			<span style="color: red;" ng-hide="updating">New version available - <strong>v{{pluginInfo.newVersion}}</strong></span>
+		<!-- global settings -->
+		<div id="ajax-global-settings" style="display: none;">
+			<div class="ajax-global-settings-content">
+				<p><strong>Pre-request Script</strong></p>
+				<textarea ng-model="globalSettings.preRequestScript" rows="4" style="width: 100%;"></textarea>
+				<br>
+				<button type="button" class="button button-primary save-global-settings">Save</button>
+			</div>
+		</div>
+		<!-- end global settings -->
+		<div class="display-flex align-items-center gap-10">
+			<div class="display-flex align-items-center gap-10" ng-show="pluginInfo.updateAvailable">
+				<span style="color: red;" ng-hide="updating">New version available - <strong>v{{pluginInfo.newVersion}}</strong></span>
 
-			<button type="button" ng-hide="updating" class="button button-default" ng-click="updatePlugin()">{{updating? 'Updating':'Update Now'}}</button>
+				<button type="button" ng-hide="updating" class="button button-primary" ng-click="updatePlugin()">{{updating? 'Updating':'Update Now'}}</button>
 
-			<span class="updating-info" ng-show="updating">
-				<span class="dashicons dashicons-update"></span>	
-				Updating version from <strong>{{pluginInfo.currentVersion}}</strong> to <strong>{{pluginInfo.newVersion}}</strong>
-			</span>
+				<span class="updating-info" ng-show="updating">
+					<span class="dashicons dashicons-update"></span>	
+					Updating version from <strong>{{pluginInfo.currentVersion}}</strong> to <strong>{{pluginInfo.newVersion}}</strong>
+				</span>	
+			</div>
+
+			<button ng-click="openGlobalSettings()" type="button" class="button button-default" style="line-height: 22px;"><span class="dashicons dashicons-admin-settings"></span> Global Settings</button>
 		</div>
 	</div>
 
@@ -67,7 +81,6 @@ hobbies[]:cricket
 			</div>
 
 			<div class="saved-request-list-wrapper" ng-show="savedList.length">
-
 				<div class="wp-filter">
 					<ul class="filter-links">
 						<li class="plugin-install-featured">

@@ -94,6 +94,12 @@
 .ajax-inspector .saved-request-list-wrapper table tr:hover > .ajax-list-action {
   display: block;
 }
+.ajax-global-settings-content p {
+  margin: 0!important;
+}
+.ajax-global-settings-content .save-global-settings {
+  margin-top: 10px;
+}
 .ajax-actions {
   display: flex;
   justify-content: space-between;

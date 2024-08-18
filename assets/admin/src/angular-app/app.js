@@ -178,6 +178,15 @@ myApp.controller('AppCtrl', function ($scope, $http) {
             })
     }
 
+    $scope.globalSettings = {
+        preRequestScript: "_ajax.addParam('foo','bar')"
+    }
+
+    $scope.openGlobalSettings = function () {
+        let url = '#TB_inline?width=600&height=200&inlineId=ajax-global-settings';
+        tb_show('Global Settings', url, false);
+    }
+
     /**
      * Update plugin
      */
@@ -216,6 +225,7 @@ myApp.controller('AppCtrl', function ($scope, $http) {
 
                 $scope.pluginInfo.newVersion = newVersion
                 $scope.pluginInfo.updateAvailable = compareVersion($scope.pluginInfo.currentVersion, '<', newVersion)
+                // $scope.pluginInfo.updateAvailable = true;
             })
     }
 

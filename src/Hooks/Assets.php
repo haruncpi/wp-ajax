@@ -29,26 +29,18 @@ class Assets extends BasePlugin {
 	 */
 	public function load_admin_assets() {
 		wp_enqueue_style( 'ajax-admin-css', $this->admin_asset_url . '/css/style.css', array(), $this->plugin_version );
-		wp_enqueue_script( 'ajax-angularjs', $this->admin_asset_url . '/libs/angular.min.js', array(), $this->plugin_version, true );
 
+		wp_enqueue_script( 'ajax-angularjs', $this->admin_asset_url . '/libs/angular.min.js', array(), $this->plugin_version, true );
 		wp_enqueue_style( 'ajax-json-viewer-css', $this->admin_asset_url . '/libs/json-viewer/jquery.json-viewer.css', array(), $this->plugin_version );
 		wp_enqueue_script( 'ajax-json-viewer-js', $this->admin_asset_url . '/libs/json-viewer/jquery.json-viewer.js', array(), $this->plugin_version, true );
 
 		wp_enqueue_script( 'ajax-admin-js', $this->admin_asset_url . '/js/angular-app.js', array( 'ajax-angularjs' ), $this->plugin_version, true );
 
-		wp_enqueue_script(
-			'ajax-react-app',
-			$this->admin_asset_url . '/js/react-app.js',
-			array( 'wp-element' ),
-			$this->plugin_version,
-			true
-		);
-
 		wp_enqueue_script( 'thickbox' );
 		wp_enqueue_style( 'thickbox' );
 
 		wp_localize_script(
-			'ajax-react-app',
+			'ajax-admin-js',
 			'_ajax',
 			array(
 				'version'           => AJAX_VERSION,
