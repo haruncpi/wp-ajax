@@ -1,29 +1,76 @@
+const { compareVersion, textToJSON, isValidJSON, toFormData } = require("./utils");
+
 let myApp = angular.module('ajaxApp', [])
 
 myApp.controller('AppCtrl', function ($scope, $http) {
+    const LS_KEY_NAME = 'wp_ajax';
+    const localData = getLocalData();
+
+    function getLocalData(key) {
+        let data = JSON.parse(localStorage.getItem(LS_KEY_NAME) || '{}')
+        if (key) {
+            return data[key]
+        }
+        return data;
+    }
+
+    function saveLocalData(key, value) {
+        if (!key) return;
+
+        let oldData = getLocalData();
+        oldData[key] = value;
+        localStorage.setItem(LS_KEY_NAME, JSON.stringify(oldData))
+    }
+
+
     $scope.sending = false;
     $scope.savedList = []
     $scope.model = {}
+    $scope.inputTypes = ['Text', 'JSON']
+    $scope.inputTypes = []
+    $scope.activeInputType = 'Text';
+    $scope.contentTypes = [
+        'application/json',
+        'application/x-www-form-urlencoded; charset=UTF-8'
+    ]
 
     function initModel() {
         $scope.model = {
             id: null,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             action: '',
             title: '',
             payload: ''
         }
     }
 
+    $scope.globalSettings = {
+        preRequestScript: getLocalData('globalSettings')?.preRequestScript ?? "WPAjax.body.add( 'foo', 'bar' )"
+    }
+
+    $scope.setActiveInputType = function (type) {
+        $scope.activeInputType = type
+    }
+
+    $scope.saveGlobalSettings = function (settings) {
+        saveLocalData('globalSettings', settings)
+        tb_remove()
+    }
+
+    $scope.openGlobalSettings = function () {
+        let url = '#TB_inline?width=600&height=250&inlineId=ajax-global-settings';
+        tb_show('Global Settings', url, false);
+    }
+
     initModel()
 
     let $ = jQuery
-    let savedData = localStorage.getItem('wp_ajax_simulator');
     let ajaxUrl = $('input.ajax_url').val()
     let editor = $('#input')
     let output = $('#output')
 
-    if (savedData) {
-        $scope.model.payload = savedData
+    if (localData.payload) {
+        $scope.model.payload = localData.payload
     } else {
         $scope.model.payload = 'action:generate-password'
     }
@@ -34,29 +81,29 @@ myApp.controller('AppCtrl', function ($scope, $http) {
         }
     });
 
-    function textToJSON(text) {
-        const jsonObject = {};
-        const lines = text.split('\n');
-
-        lines.forEach(line => {
-            const [key, value] = line.split(':').map(item => item.trim());
-            if (key) {
-                jsonObject[key] = isNaN(value) ? value : Number(value);
-            }
-        });
-
-        return jsonObject;
-    }
-
     let jsonViewerConfig = {
         collapsed: false,
         rootCollapsable: false,
         bigNumbers: false
     }
 
+    let jsonData = {}
+    const WPAjax = {
+        body: {
+            add: function (key, value) {
+                jsonData[key] = value
+            }
+        }
+
+    }
+
     $('#ajax').click(function () {
         let input = editor.val()
-        let jsonData = textToJSON(input)
+        if (isValidJSON(input)) {
+            jsonData = JSON.parse(input);
+        } else {
+            jsonData = textToJSON(input)
+        }
 
         if (input && jsonData) {
             try {
@@ -65,11 +112,23 @@ myApp.controller('AppCtrl', function ($scope, $http) {
                     return;
                 }
 
-                localStorage.setItem('wp_ajax_simulator', input)
+                saveLocalData('payload', input)
+
+                let preRequestScript = getLocalData('globalSettings')?.preRequestScript ?? false
+                if (preRequestScript) {
+                    try {
+                        eval(preRequestScript)
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+
+                // console.log(jsonData)
 
                 $.ajax({
                     type: 'POST',
                     url: ajaxUrl,
+                    contentType: $scope.model.contentType,
                     data: jsonData,
                     beforeSend: function () {
                         $scope.sending = true
@@ -109,14 +168,6 @@ myApp.controller('AppCtrl', function ($scope, $http) {
         }
     })
 
-    function toFormData(obj) {
-        let formData = new FormData();
-        for (let [key, val] of Object.entries(obj)) {
-            formData.append(key, val);
-        }
-        return formData;
-    }
-
     let config = {
         transformRequest: angular.identity,
         headers: {
@@ -139,7 +190,7 @@ myApp.controller('AppCtrl', function ($scope, $http) {
 
     $scope.saving = false;
     $scope.save = function (model) {
-        let jsonPayload = textToJSON(model.payload)
+        let jsonPayload = isValidJSON(model.payload) ? JSON.parse(model.payload) : textToJSON(model.payload)
         if (!jsonPayload.action) {
             alert('action key is required')
             return;
@@ -163,6 +214,9 @@ myApp.controller('AppCtrl', function ($scope, $http) {
             initModel()
         } else {
             $scope.model = row;
+            if (!$scope.model.contentType) {
+                $scope.model.contentType = 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
         }
 
     }
@@ -178,39 +232,10 @@ myApp.controller('AppCtrl', function ($scope, $http) {
             })
     }
 
-    $scope.globalSettings = {
-        preRequestScript: "_ajax.addParam('foo','bar')"
-    }
-
-    $scope.openGlobalSettings = function () {
-        let url = '#TB_inline?width=600&height=200&inlineId=ajax-global-settings';
-        tb_show('Global Settings', url, false);
-    }
 
     /**
      * Update plugin
      */
-    function compareVersion(v1, comparator, v2) {
-        "use strict";
-        var comparator = comparator == '=' ? '==' : comparator;
-        if (['==', '===', '<', '<=', '>', '>=', '!=', '!=='].indexOf(comparator) == -1) {
-            throw new Error('Invalid comparator. ' + comparator);
-        }
-        var v1parts = v1.split('.'), v2parts = v2.split('.');
-        var maxLen = Math.max(v1parts.length, v2parts.length);
-        var part1, part2;
-        var cmp = 0;
-        for (var i = 0; i < maxLen && !cmp; i++) {
-            part1 = parseInt(v1parts[i], 10) || 0;
-            part2 = parseInt(v2parts[i], 10) || 0;
-            if (part1 < part2)
-                cmp = 1;
-            if (part1 > part2)
-                cmp = -1;
-        }
-        return eval('0' + comparator + cmp);
-    }
-
     $scope.pluginInfo = {
         currentVersion: _ajax.version,
         newVersion: null,

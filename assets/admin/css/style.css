@@ -29,7 +29,8 @@
 }
 .ajax-inspector textarea {
   font-family: "FiraCode" !important;
-  border-color: #ddd;
+  border-color: #fff;
+  border-radius: 0;
   padding: 10px;
   background: #f9f9f9;
 }
@@ -80,6 +81,25 @@
   min-width: 50%;
   margin-right: 25px;
 }
+.ajax-inspector .input-wrapper .ajax-input-data-types {
+  display: flex;
+}
+.ajax-inspector .input-wrapper .ajax-input-data-types > div {
+  padding: 5px;
+  background-color: white;
+  min-width: 30px;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+.ajax-inspector .input-wrapper .ajax-input-data-types > div:first-child {
+  border-right: 1px solid #ddd;
+}
+.ajax-inspector .input-wrapper .ajax-input-data-types .active {
+  background-color: #555;
+  color: white;
+  font-weight: 500;
+}
 .ajax-inspector .response-wrapper {
   max-width: 50%;
   flex-grow: 1;
@@ -95,10 +115,11 @@
   display: block;
 }
 .ajax-global-settings-content p {
-  margin: 0!important;
+  margin: 0 !important;
 }
 .ajax-global-settings-content .save-global-settings {
   margin-top: 10px;
+  float: right;
 }
 .ajax-actions {
   display: flex;
@@ -143,4 +164,16 @@ button:visited {
 }
 .updating-info .dashicons-update {
   animation: rotation 2s infinite linear;
+}
+.input-info-table {
+  width: 100%;
+}
+.input-info-table tr td {
+  white-space: pre-line;
+  vertical-align: top;
+  padding: 3px 5px;
+}
+.input-info-table tr:first-child td {
+  background-color: #555;
+  color: #fff;
 }

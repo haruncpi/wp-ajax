@@ -11,21 +11,21 @@
   padding-left: 5px;
   padding-top: 10px;
 
-  .display-flex{
+  .display-flex {
     display: flex;
   }
 
-  .align-items-center{
+  .align-items-center {
     align-items: center;
   }
 
-  .gap-5{
+  .gap-5 {
     gap: 5px;
   }
-  .gap-10{
+  .gap-10 {
     gap: 10px;
   }
-  .gap-15{
+  .gap-15 {
     gap: 15px;
   }
 
@@ -36,7 +36,8 @@
 
   textarea {
     font-family: "FiraCode" !important;
-    border-color: #ddd;
+    border-color: #fff;
+    border-radius: 0;
     padding: 10px;
     background: #f9f9f9;
   }
@@ -46,7 +47,7 @@
     align-items: center;
     margin-bottom: 10px;
     justify-content: space-between;
-    h1{
+    h1 {
       margin-right: 10px;
     }
   }
@@ -95,6 +96,27 @@
     width: 50%;
     min-width: 50%;
     margin-right: 25px;
+
+    .ajax-input-data-types {
+      display: flex;
+      > div {
+        padding: 5px;
+        background-color: white;
+        min-width: 30px;
+        text-align: center;
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+
+        &:first-child {
+          border-right: 1px solid #ddd;
+        }
+      }
+      .active {
+        background-color: #555;
+        color: white;
+        font-weight: 500;
+      }
+    }
   }
   .response-wrapper {
     max-width: 50%;
@@ -115,13 +137,13 @@
   }
 }
 
-
-.ajax-global-settings-content{
-  p{
-    margin: 0!important;
+.ajax-global-settings-content {
+  p {
+    margin: 0 !important;
   }
-  .save-global-settings{
+  .save-global-settings {
     margin-top: 10px;
+    float: right;
   }
 }
 
@@ -171,10 +193,27 @@ button {
   }
 }
 
-
-.updating-info{
+.updating-info {
   color: green;
-  .dashicons-update{
+  .dashicons-update {
     animation: rotation 2s infinite linear;
+  }
+}
+
+.input-info-table {
+  width: 100%;
+  tr td {
+    white-space: pre-line;
+    vertical-align: top;
+    padding: 3px 5px;
+  }
+
+  tr {
+    &:first-child {
+      td {
+        background-color: #555;
+        color: #fff;
+      }
+    }
   }
 }

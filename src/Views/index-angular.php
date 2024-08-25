@@ -18,9 +18,9 @@
 		<div id="ajax-global-settings" style="display: none;">
 			<div class="ajax-global-settings-content">
 				<p><strong>Pre-request Script</strong></p>
-				<textarea ng-model="globalSettings.preRequestScript" rows="4" style="width: 100%;"></textarea>
+				<textarea ng-model="globalSettings.preRequestScript" rows="8" style="width: 100%;padding: 5px 10px;"></textarea>
 				<br>
-				<button type="button" class="button button-primary save-global-settings">Save</button>
+				<button ng-click="saveGlobalSettings(globalSettings)" type="button" class="button button-primary save-global-settings">Save</button>
 			</div>
 		</div>
 		<!-- end global settings -->
@@ -42,21 +42,29 @@
 
 	<?php add_thickbox(); ?>
 	<div id="param-info-thickbox" style="display:none;">
-		<p style="margin-bottom: 0;">Key value pair with (:) separated.
-		<br>
-		<br>
-		<strong>Example</strong>
-		<br>
-<pre style="margin-top: 0;">
-name:jhon
-nage:25
-city:dhaka
-email:jhon@example.com
-hobbies[]:drawing
-hobbies[]:swimming
-hobbies[]:cricket
-</pre>
-		</p>
+		<p>You can use key:value format or JSON</p>
+		<table class="input-info-table">
+			<tr>
+				<td>Key:Value</td>
+				<td>JSON</td>
+			</tr>
+			<tr>
+				<td>
+					action:profile_update
+					name:jhon
+					email:jhon@example.com
+					hobbies[]:drawing
+				</td>
+				<td>
+					{
+						"action" : "profile_update",
+						"name": "jhon",
+						"email": "jhon@example.com",
+						"hobbies": ["drawing"]
+					}
+				</td>
+			</tr>
+		</table>
 	</div>
 
 	<div class="body-wrapper">
@@ -66,8 +74,11 @@ hobbies[]:cricket
 			<div class="ajax-actions">
 				<div class="display-flex align-items-center gap-10">
 					<strong>
-						<a style="color: #777;" href="#TB_inline?width=300&height=220&inlineId=param-info-thickbox" title="Params" class="dashicons dashicons-info-outline thickbox"></a> 
-						Params</strong>
+						<a style="color: #777;" href="#TB_inline?width=300&height=220&inlineId=param-info-thickbox" title="Inputs" class="dashicons dashicons-info-outline thickbox"></a> 
+					Inputs</strong>
+					<select style="width: 150px; display:none" name="contentType" ng-model="model.contentType">
+						<option value="{{type}}" ng-repeat="type in contentTypes">{{type}}</option>
+					</select>
 				</div>
 				<div>
 					<span class="selected-title" ng-show="model.id"><strong>Selected</strong>: {{model.title}}</span>
@@ -77,7 +88,15 @@ hobbies[]:cricket
 			</div>
 
 			<div>
-				<textarea id="input" ng-model="model.payload" rows="4"></textarea>
+				<div class="display-flex" style="justify-content: space-between;">
+					<div class="ajax-input-data-types">
+						<div 
+						ng-click="setActiveInputType(t)"
+						ng-class="activeInputType==t?'active':''" 
+						ng-repeat="t in inputTypes">{{t}}</div>
+					</div>
+				</div>
+				<textarea id="input" ng-model="model.payload" rows="12"></textarea>
 			</div>
 
 			<div class="saved-request-list-wrapper" ng-show="savedList.length">
